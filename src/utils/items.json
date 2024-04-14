@@ -1,0 +1,14 @@
+[
+    {"name": "cake", "description": "A delicious cake", "cost": 10},
+    {"name": "cookie", "description": "A delicious cookie", "cost": 5},
+    {"name": "muffin", "description": "A delicious muffin", "cost": 7},
+    {"name": "pie", "description": "A delicious pie", "cost": 12},
+    {"name": "brownie", "description": "A delicious brownie", "cost": 8},
+    {"name": "donut", "description": "A delicious donut", "cost": 6},
+    {"name": "cupcake", "description": "A delicious cupcake", "cost": 4},
+    {"name": "bread", "description": "A delicious bread", "cost": 3},
+    {"name": "croissant", "description": "A delicious croissant", "cost": 2},
+    {"name": "bagel", "description": "A delicious bagel", "cost": 1}
+]
+
+
