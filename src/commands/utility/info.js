@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { User } = require('../../models/Users');
+const User = require('../../models/Users');
 
 module.exports = {
     cooldown: 3,
@@ -33,18 +33,15 @@ module.exports = {
             })
             .setTimestamp();
         
-        let account;
-        if (interaction.options.addUserOption('target')) {
-            account = interaction.option.getuserOption('target');
-        } else {
-            account = interaction.user;
-        }
+        const interactionaccount = interaction.options.getUser('target');
 
+        const account = interactionaccount ? interactionaccount : interaction.user;
+        
         let user = await User.findOne({ where: { user_id: account.id } });
         
         const userInfo = new EmbedBuilder()
             .setTitle('User Information')
-            .setDescription(`User profile of user ${account.username}.`)
+            .setDescription(`User profile of user ${account.displayName}.`)
             .setThumbnail(account.avatarURL())
             .addFields(
                 { name: `balance`, value: `${user.balance}`},
@@ -52,7 +49,7 @@ module.exports = {
                 { name: 'experience', value: `${user.exp}/${user.expToNextLevel}`, inline: true},
             )
             .setColor('0099FF')
-            .setFooter({ text: `ID: ${account.id}`, iconURL: account.avatarURL()})
+            .setFooter({ text: `user ${account.username}`, iconURL: account.avatarURL()})
             .setTimestamp();
  
         switch (interaction.options.getSubcommand()) {

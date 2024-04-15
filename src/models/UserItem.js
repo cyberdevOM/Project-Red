@@ -10,6 +10,10 @@ const UserItem = sequelize.define('UserItem', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    item_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     amount: {
         type: DataTypes.INTEGER,
         allowNull: false,

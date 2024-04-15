@@ -1,5 +1,9 @@
 const { Events, Message } = require('discord.js');
-const User = require('../models/Users');
+const { expCheck, exists } = require('../utils/userChecks');
+
+// -------------------------------------------------------------
+// This event listener listens for the message event 
+// and checks if the user has enough xp to level up.
 
 module.exports = {
     name: Events.MessageCreate,
@@ -8,37 +12,13 @@ module.exports = {
         const author = message.author;
 
         try {
-            let user = await User.findOne({ where: { user_id: author.id } });
+            const userData = await exists(author); // userCecks check if user esists
 
-            if (!user) {
-                user = await User.create({ 
-                    user_id: author.id, 
-                    username: author.username,
-                    balance: 0,
-                    exp: 0,
-                    level: 0,
-                    expToNextLevel: 100,
-                });
-            }
+            userData.exp += 25; // add 25 xp to the user
 
-            user.exp += 50;
-
-            if (user.exp >= user.expToNextLevel) {
-                user.level += 1;
-                user.exp = 0;
-                user.expToNextLevel = Math.pow(2, user.level) * 100;
-            }
-
-            await User.update({
-                balance: user.balance + 1,
-                exp: user.exp,
-                level: user.level,
-                expToNextLevel: user.expToNextLevel,
-            }, {
-                where: { user_id: author.id },
-            });
+            await expCheck(author, userData); // userChecks check if exp --> level up and update info.
         } catch (error) {
-            console.error('An error occurred:', error);
+            console.error('An error occurred:', error); // log error
         }
     }, 
 }

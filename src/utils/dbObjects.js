@@ -8,10 +8,11 @@ const CurrencyShop = require('../models/CurrencyShop');
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
 Reflect.defineProperty(Users.prototype, 'addItem', {
-
-    value: async item => {
+    
+    value: async function(item) {
         const userItem = await UserItems.findOne({
-            where: { user_id: this.user_id, item_id: item.id },
+            where: { user_id: this.user_id, item_id: item.id},
+            include: ['item'],
         });
 
         if (userItem) {
@@ -19,7 +20,7 @@ Reflect.defineProperty(Users.prototype, 'addItem', {
             return userItem.save();
         }
 
-        return UserItems.create({ user_id: this.user_id, item_id: item.id, amount: 1 });
+        return UserItems.create({ user_id: this.user_id, item_id: item.id, item_name: item.name, amount: 1 });
     }
 });
 

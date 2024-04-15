@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { User } = require('../../models/Users');
+const User = require('../../models/Users');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -21,7 +21,7 @@ module.exports = {
             return interaction.reply({ content: 'You do not have permission to use this command.', ephemeral: true });
         } else {
             // Remove the user from the database
-            const data = await User.destroy({ where: { id: target.id } });
+            const data = await User.destroy({ where: { user_id: target.id } });
         
             if (!data) return interaction.reply({ content: `The user ${target.displayName} was not found in the database.`, ephemeral: true });
             return interaction.reply({ content: `The user ${target.displayName} has been removed from the database.`, ephemeral: true });

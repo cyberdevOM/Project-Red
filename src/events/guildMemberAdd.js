@@ -1,5 +1,5 @@
 const { Events } = require('discord.js');
-const User = require('../models/Users');
+const { Users } = require('../utils/dbObjects');
 
 module.exports = {
     name: Events.GUILD_MEMBER_ADD,
@@ -11,7 +11,7 @@ module.exports = {
         channel.send(`Welcome to the server, ${user}`);
 
         try {
-            await User.create({
+            await Users.create({
                 id: user.id,
                 username: user.username,
                 balance: 0,
