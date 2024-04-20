@@ -28,13 +28,20 @@ module.exports = {
     async execute(interaction) {
         const user = await exists(interaction.user);
         const item = await CurrencyShop.findOne({ where: { name: interaction.options.getString('item')} });
+        const userItems = await UserItems.findAll({ where: { user_id: interaction.user.id }})
+
 
         if (!item) return interaction.reply({ content: 'That item does not exist.', ephemeral: true });
         if (item.cost > user.balance) return interaction.reply({ content: 'You do not have enough money to buy this item.', ephemeral: true });
-
+        let foundItem = userItems.find(ui => ui.item_name === item.name);
+        if (foundItem) {
+            foundItem.amount += 1;
+            await foundItem.save();
+        } else {
+            await user.addItem(item);
+        }
         user.balance -= item.cost;
         await balanceUpdate(interaction.user, user);
-        await user.addItem(item);
 
         return interaction.reply({ content: `You have bought ${item.name}.`, ephemeral: true });
     }
