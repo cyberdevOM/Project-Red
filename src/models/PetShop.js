@@ -1,7 +1,7 @@
 const sequelize = require('../utils/database');
 const { DataTypes } = require('sequelize');
 
-const CurrencyShop = sequelize.define('CurrencyShop', {
+const PetShop = sequelize.define('PetShop', {
     name: {
         type: DataTypes.STRING,
         unique: true,
@@ -14,11 +14,10 @@ const CurrencyShop = sequelize.define('CurrencyShop', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-
 }, {
     timestamps: false,
     sequelize,
-    modelName: 'ItemShop',
+    modelName: 'PetShop',
 });
 
-module.exports = CurrencyShop;
+module.exports = PetShop;

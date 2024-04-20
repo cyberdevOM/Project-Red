@@ -1,27 +1,28 @@
 const sequelize = require('../utils/database');
 const { DataTypes } = require('sequelize');
 
-const UserItem = sequelize.define('UserItem', {
+const UserPet = sequelize.define('UserPet', {
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    item_id: {
+    pet_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    item_name: {
+    pet_name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    amount: {
-        type: DataTypes.INTEGER,
+    pet_description: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
+    // pet hp and attack for battle system to come later
 }, {
     timestamps: false,
     sequelize,
-    modelName: 'UserItem',
+    modelName: 'UserPets',
 });
 
-module.exports = UserItem;
+module.exports = UserPet ;

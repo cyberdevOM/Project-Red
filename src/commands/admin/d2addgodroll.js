@@ -1,0 +1,1 @@
+// god roll admin command to add a god roll to the d2 god rolls tables

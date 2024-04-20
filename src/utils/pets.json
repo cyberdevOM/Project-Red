@@ -1,0 +1,12 @@
+[
+    {"name": "dog", "description": "A cute woofer", "cost": 500},
+    {"name": "cat", "description": "fur ball and cuddles", "cost": 400},
+    {"name": "hamster", "description": "small nom nom", "cost": 500},
+    {"name": "rabbit", "description": "big nom nom", "cost": 600},
+    {"name": "parrot", "description": "polly got crackers", "cost": 900},
+    {"name": "goldfish", "description": "blob...", "cost": 100},
+    {"name": "turtle", "description": "shelly go bonk", "cost": 1000},
+    {"name": "chinchilla", "description": "weeeee", "cost": 1400},
+    {"name": "ferret", "description": "zoom .... zoooom", "cost": 1750},
+    {"name": "hedgehog", "description": "spikey ball of hugs", "cost": 800}
+]
